@@ -9,9 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+
+      },
+      colors: {
+        'marvingreen': '#2c634f',
+        'marvinaqua': '#2c5c63',
+        'marvinblue': '#2c4163',
       },
     },
   },
