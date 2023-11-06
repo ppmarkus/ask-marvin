@@ -1,14 +1,15 @@
 "use client";
 
-import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-// import ChatResultTable from "./ChatResultTable";
+import ChatResultTable from "./ChatResultTable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 
 import { ChatResultProps, DataUpdateStatus } from "@/app/lib/definitions";
-import { Alert, Box, Button, IconButton, TextField } from "@mui/material";
-import atomOneDark from "react-syntax-highlighter/dist/esm/styles/hljs/atom-one-dark";
+import { Alert, Box, Button, IconButton, Snackbar, TextField, Tooltip } from "@mui/material";
+import { atomOneDark, atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { sql } from "@vercel/postgres";
 
 export default function ChatResult(props: ChatResultProps) {
   const {
@@ -35,6 +36,7 @@ export default function ChatResult(props: ChatResultProps) {
   const [editedSqlQuery, setEditedSqlQuery] = useState(answer_sql);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const [liked, setLiked] = useState<boolean>(like_rating);
   const [notLiked, setNotLiked] = useState<boolean>(not_like_rating);
@@ -45,7 +47,7 @@ export default function ChatResult(props: ChatResultProps) {
 
   useEffect(() => {
     if (isMounted) {
-      // console.log("like_rating: " + like_rating);
+      console.log("question_ask_date: " + question_ask_date);
       // console.log("not_like_rating: " + not_like_rating);
       // console.log("id: " + id);
       // when liked or notLiked changes, send the rating to the backend
@@ -142,35 +144,81 @@ export default function ChatResult(props: ChatResultProps) {
             <div className="font-bold min-w-10em w-10em">Answer:</div>
             <div className="flex-grow">{answer_text}</div>
           </div>
-          <div className="flex flex-row items-center">
-            <div className="font-bold min-w-10em w-10em">Confidence:</div>
-            <div>{answer_confidence_score?.toLocaleString(undefined, { style: "percent" })}</div>
-          </div>
         </div>
       )}
-      <div className="flex flex-row items-center">
-        {answer_time_taken && <div className="font-bold min-w-150px w-10em">Time taken:</div>}
-        <div>{answer_time_taken}s</div>
-      </div>
-      <div className="flex flex-row items-center">
-        {question_ask_date && <div className="font-bold min-w-10em w-10em">Question Asked:</div>}
-        <div>{question_ask_date?.replace("T", " ")}</div>
-      </div>
-      <div className="flex flex-row items-center">
-        {sql_generation_status && <div className="font-bold min-w-10em w-10em">Valid SQL?</div>}
-        <div>{sql_generation_status}</div>
-      </div>
-      <div className="flex flex-row items-center">
-        <div className="font-bold min-w-150px w-10em">評価/Rating:</div>
+      {answer_table && answer_table.length > 5 ? (
         <div>
-          <IconButton size="small" onClick={() => handleLikeClick()}>
-            <FontAwesomeIcon style={{ color: liked ? "green" : "" }} size="sm" icon={faThumbsUp} />
-          </IconButton>
-          <IconButton style={{ marginLeft: "0.5em" }} size="small" onClick={() => handleNotLikeClick()}>
-            <FontAwesomeIcon style={{ color: notLiked ? "red" : "" }} className="marvinratingicon" size="sm" icon={faThumbsDown} />
-          </IconButton>
+          <ChatResultTable tableData={JSON.parse(answer_table)} />
+        </div>
+      ) : null}
+      <div className="mt-2 text-gray-500 text-xs bg-white rounded-lg shadow-md p-4">
+        <div className="grid grid-cols-3 grid-rows-2 gap-0">
+          {answer_total_tokens ? (
+            <div className="flex">
+              <div className="font-bold pr-2">Tokens:</div>
+              <div>{answer_total_tokens?.toLocaleString()}</div>
+            </div>
+          ) : (
+            <div className="flex"></div>
+          )}
+
+          {answer_time_taken ? (
+            <div className="flex">
+              <div className="font-bold pr-2">Time taken:</div>
+              <div>{answer_time_taken}s</div>
+            </div>
+          ) : (
+            <div className="flex"></div>
+          )}
+          {question_ask_date ? (
+            <div className="flex">
+              <div className="font-bold pr-2">Asked:</div>
+              <div>{question_ask_date.replace("T", " ")}</div>
+            </div>
+          ) : (
+            <div className="flex"></div>
+          )}
+          {sql_generation_status ? (
+            <div className="flex">
+              <div className="font-bold pr-2">Valid SQL?</div>
+              <div>{sql_generation_status}</div>
+            </div>
+          ) : (
+            <div className="flex"></div>
+          )}
+          {/* {answer_total_cost ? (
+            <div className="flex">
+              <div className="font-bold pr-2">Cost: $</div>
+              <div>{answer_total_cost}</div>
+            </div>
+          ) : (
+            <div className="flex"></div>
+          )} */}
+          {answer_confidence_score ? (
+            <div className="flex">
+              <div className="font-bold pr-2">Confidence:</div>
+              <div>{answer_confidence_score?.toLocaleString(undefined, { style: "percent" })}</div>
+            </div>
+          ) : (
+            <div className="flex"></div>
+          )}
+
+          <div className="flex">
+            <div className="flex flex-row items-center">
+              <div className="font-bold min-w-150px w-10em pr-2">評価/Rating:</div>
+              <div>
+                <IconButton size="small" onClick={() => handleLikeClick()}>
+                  <FontAwesomeIcon style={{ color: liked ? "green" : "" }} size="sm" icon={faThumbsUp} />
+                </IconButton>
+                <IconButton style={{ marginLeft: "0.5em" }} size="small" onClick={() => handleNotLikeClick()}>
+                  <FontAwesomeIcon style={{ color: notLiked ? "red" : "" }} className="marvinratingicon" size="sm" icon={faThumbsDown} />
+                </IconButton>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       {answer_sql && (
         <div>
           <div className="flex flex-row items-center">
@@ -204,20 +252,22 @@ export default function ChatResult(props: ChatResultProps) {
                         wrapLongLines={true}
                         wrapLines={true}
                         language="sql"
-                        style={atomOneDark}
+                        style={atomOneLight}
                       >
                         {answer_sql}
                       </SyntaxHighlighter>
                     </Box>
-                    <IconButton className="ml-10 mb-10 p-0" onClick={handleCopyClick}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path
-                          fillRule="evenodd"
-                          d="M16 5h-1V3a2 2 0 00-2-2H7a2 2 0 00-2 2v2H4a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2zM7 3h6v2H7a1 1 0 01-1-1zm9 15a1 1 0 01-1 1H5a1 1 0 01-1-1V7h12v11z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </IconButton>
+                    <Tooltip title="Copy Question">
+                      <FontAwesomeIcon
+                        icon={faCopy}
+                        color="gray"
+                        onClick={() => {
+                          navigator.clipboard.writeText(answer_sql);
+                          setIsCopied(true);
+                        }}
+                        className="cursor-pointer ml-2"
+                      />
+                    </Tooltip>
                     <Button size="small" onClick={handleEditClick} className="ml-1">
                       Edit
                     </Button>
@@ -228,7 +278,21 @@ export default function ChatResult(props: ChatResultProps) {
           )}
         </div>
       )}
-      {error_message && <Alert severity="error">{error_message}</Alert>}
+      {error_message && (
+        <Alert className="mt-4" severity="error">
+          {error_message}
+        </Alert>
+      )}
+      <Snackbar
+        open={isCopied}
+        autoHideDuration={2000}
+        onClose={() => setIsCopied(false)}
+        message="Text copied!"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      />
     </div>
   );
 }

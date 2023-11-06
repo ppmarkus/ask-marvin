@@ -16,7 +16,7 @@ export type ChatQuestionAnswerUnitType = {
   isDataLoading?: boolean;
   answer_sql?: string | null;
   sql_generation_status?: string | null;
-  answer_table?: JSON | null;
+  answer_table?: string | null;
   error_message?: string | null;
   answer_time_taken?: number | null;
   answer_total_tokens?: number | null;

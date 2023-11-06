@@ -1,11 +1,10 @@
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-
 import { ColDef } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react/lib/agGridReact";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { MagnifyingGlassIcon, DocumentArrowDownIcon } from "@heroicons/react/24/outline";
 import { FloatCellRenderer4DecimalsPadded, prettyFormatFloat2Decimals, prettyFormatIntegers } from "@/app/lib/aggridFormatters";
 import { CellValueNumberColorClassDecider } from "@/app/lib/aggridCellFunctions";
 import Box from "@mui/material/Box";
@@ -103,7 +102,7 @@ function ChatResultTable(tableData: any) {
   }, []);
 
   const onBtExport = useCallback(() => {
-    gridRef.current!.api.exportDataAsExcel();
+    gridRef.current!.api.exportDataAsCsv();
   }, []);
 
   return (
@@ -128,7 +127,7 @@ function ChatResultTable(tableData: any) {
               marginBottom: "10px",
               width: "300px",
             },
-            startAdornment: <MagnifyingGlassIcon style={{ opacity: 0.3 }} />,
+            startAdornment: <MagnifyingGlassIcon className="h-5 w-5 text-gray-300" />,
           }}
         />
         <Box sx={{ flexGrow: 1 }}></Box>
@@ -142,8 +141,9 @@ function ChatResultTable(tableData: any) {
             alignSelf: "flex-end",
           }}
         >
-          <button onClick={onBtExport} style={{ marginBottom: "5px", fontWeight: "bold" }}>
-            Export to Excel
+          <button onClick={onBtExport} className="flex hover:bg-gray-100 my-2 px-2 rounded flex items-center border-2 text-sm">
+            <DocumentArrowDownIcon className="h-4 w-4 mr-2" />
+            Export to CSV
           </button>
         </Box>
       </Box>
