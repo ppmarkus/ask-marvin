@@ -13,7 +13,9 @@ const config: Config = {
       },
       colors: {
         'marvingreen': '#2c634f',
-        'marvinaqua': '#2c5c63',
+        'marvinprimary-500': '#2c5c63',
+        'marvinprimary-300': '#33A5B1',
+        'marvinprimary-100': '#C3E9ED',
         'marvinblue': '#2c4163',
       },
     },

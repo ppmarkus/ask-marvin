@@ -1,7 +1,7 @@
 "use client";
 
-import { faClock } from "@fortawesome/free-regular-svg-icons";
-import { faUserGroup, faCopy, faDatabase, faMagnifyingGlass, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 
@@ -31,9 +31,9 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
+              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-marvinprimary-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
               {
-                "bg-sky-100 text-blue-600": pathname === link.href,
+                "bg-marvinprimary-100 text-blue-600": pathname === link.href,
               }
             )}
           >

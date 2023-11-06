@@ -1,3 +1,9 @@
+import MarvinMainChatPanel from "@/app/ui/ask-marvin/MarvinMainChatPanel";
+
 export default function Page() {
-  return <div>Ask Marvin</div>;
+  return (
+    <div className="flex overflow-y">
+      <MarvinMainChatPanel />
+    </div>
+  );
 }
