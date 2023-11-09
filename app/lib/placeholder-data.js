@@ -25,6 +25,189 @@ const table_data_demo = [
   { Date: "2023-07-31", RH_Beta: 0.140914264 },
 ];
 
+const table_data_demo2 = [
+  {
+    "ticker": "2531",
+    "shortName": "TAKARA HOLDINGS",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "3405",
+    "shortName": "KURARAY CO LTD",
+    "earningYear": "2023",
+    "period": "Q3",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "13:00:00",
+    "estimate_eps": 48.640000
+  },
+  {
+    "ticker": "3659",
+    "shortName": "NEXON CO LTD",
+    "earningYear": "2023",
+    "period": "Q3",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "15:00:00",
+    "estimate_eps": 33.816000
+  },
+  {
+    "ticker": "4004",
+    "shortName": "RESONAC HOLDINGS",
+    "earningYear": "2023",
+    "period": "Q3",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": -5.520000
+  },
+  {
+    "ticker": "4046",
+    "shortName": "OSAKA SODA CO LT",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "4985",
+    "shortName": "EARTH CORP",
+    "earningYear": "2023",
+    "period": "Q3",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 1.240000
+  },
+  {
+    "ticker": "6016",
+    "shortName": "JAPAN ENGINE COR",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "6055",
+    "shortName": "JAPAN MATERIAL",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "15:00:00",
+    "estimate_eps": 20.700000
+  },
+  {
+    "ticker": "6525",
+    "shortName": "KOKUSAI ELECTRIC",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "15:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "6758",
+    "shortName": "SONY GROUP CORP",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 392.700000
+  },
+  {
+    "ticker": "7014",
+    "shortName": "NAMURA SHIPBUILD",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "7201",
+    "shortName": "NISSAN MOTOR CO",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "16:00:00",
+    "estimate_eps": 51.133000
+  },
+  {
+    "ticker": "7267",
+    "shortName": "HONDA MOTOR CO",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "15:00:00",
+    "estimate_eps": 216.310000
+  },
+  {
+    "ticker": "7731",
+    "shortName": "NIKON CORP",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 35.055000
+  },
+  {
+    "ticker": "8086",
+    "shortName": "NIPRO CORP",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "14:00:00",
+    "estimate_eps": 40.100000
+  },
+  {
+    "ticker": "8331",
+    "shortName": "CHIBA BANK LTD",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "15:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "8336",
+    "shortName": "MUSASHINO BANK",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "8358",
+    "shortName": "SURUGA BANK LTD",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 0.000000
+  },
+  {
+    "ticker": "8802",
+    "shortName": "MITSUBISHI ESTAT",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "15:00:00",
+    "estimate_eps": 51.150000
+  },
+  {
+    "ticker": "9616",
+    "shortName": "KYORITSU MAINTEN",
+    "earningYear": "2024",
+    "period": "S1",
+    "announcement_date": "2023-11-09",
+    "announcement_time": "00:00:00",
+    "estimate_eps": 125.640000
+  }
+];
+
 const chat_qestion_answer_data = [
   {
     id: "1",
@@ -68,7 +251,7 @@ const chat_qestion_answer_data = [
     id: "3",
     question: "What is the RH Daily Beta for August 2023?",
     isDataLoading: false,
-    answer_table: JSON.stringify(table_data_demo),
+    answer_table: JSON.stringify(table_data_demo2),
     answer_sql:
       "select processDate,sum(if(side='S',-1,1)*beta*t05PortfolioResponsibilities.RHExposure) as RHSensitivity " +
       "from t05PortfolioResponsibilities " +
