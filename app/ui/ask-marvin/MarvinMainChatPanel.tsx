@@ -1,13 +1,11 @@
 "use client";
 
-import { LinearProgress } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
-import { MarvinMainChatProps, ChatQuestionAnswerUnitType } from "@/app/lib/definitions";
+import { ChatQuestionAnswerUnitType } from "@/app/lib/definitions";
 import { chat_qestion_answer_data } from "@/app/lib/placeholder-data";
 
 import UserInputPrompt from "@/app/ui/ask-marvin/UserInputPrompt";
-// import { useSession } from "next-auth/react";
 import ChatQuestionAnswerUnit from "./ChatQuestionAnswerUnit";
 
 function MarvinMainChatPanel() {
@@ -17,7 +15,6 @@ function MarvinMainChatPanel() {
   const [sessionUserName, setSessionUserName] = useState<string | null>("");
   const [sessionUserEmail, setSessionUserEmail] = useState<string | null>("");
   const [isTyping, setIsTyping] = useState<boolean>(true);
-  // const { data: session } = useSession();
   const [errorMessage, setErrorMessage] = useState<string | null>("");
   const [hasError, setHasError] = useState<boolean>(false);
   const [dataLoading, setDataLoading] = useState<boolean>(false);
@@ -40,29 +37,6 @@ function MarvinMainChatPanel() {
       scrollableDivRef.current.style.paddingBottom = `${inputPromptHeight}px`;
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (session) {
-  //     if (session.user) {
-  //       const loggedinusername: string = session.user.name!;
-  //       setSessionUserEmail(session.user.email!);
-  //       if (loggedinusername.indexOf(" ") > 0) {
-  //         const username = session.user.name?.substring(0, session.user.name.indexOf(" "))!;
-  //         setSessionUserName(username);
-  //       } else {
-  //         setSessionUserName(loggedinusername);
-  //       }
-  //     }
-  //   }
-  // }, [session]);
-
-  // // load Marvin chat log from the server
-  // useEffect(() => {
-  //   // get the chat log from the server
-  //   if (sessionUserEmail) {
-  //     fetch_chat_log_items_for_user();
-  //   }
-  // }, [sessionUserEmail]);
 
   useEffect(() => {
     if (logEntryToLoad) {
@@ -148,8 +122,6 @@ function MarvinMainChatPanel() {
     const data = await response.json();
 
     const lastChatItems: ChatQuestionAnswerUnitType[] = data["chat_items"];
-
-    // console.log(lastChatItems);
 
     setChatQuestionAnswerUnits(lastChatItems);
 

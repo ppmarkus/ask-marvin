@@ -10,7 +10,6 @@ import Tooltip from "@mui/material/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { InputAdornment, Snackbar } from "@mui/material";
-// import WriteToClipboard from "../common/WriteToClipboard";
 
 interface UserInputPromptProps {
   question: string;
@@ -21,21 +20,6 @@ function UserInputPromptSent(props: UserInputPromptProps): JSX.Element {
   const { question, isCompleted } = props;
   const [sessionUserName, setSessionUserName] = useState<string | null>("");
   const [isCopied, setIsCopied] = useState<boolean>(false);
-  // const { data: session } = useSession();
-
-  // useEffect(() => {
-  //   if (session) {
-  //     if (session.user) {
-  //       const loggedinusername: string = session.user.name!;
-  //       if (loggedinusername.indexOf(" ") > 0) {
-  //         const username = session.user.name?.substring(0, session.user.name.indexOf(" "))!;
-  //         setSessionUserName(username);
-  //       } else {
-  //         setSessionUserName(loggedinusername);
-  //       }
-  //     }
-  //   }
-  // }, [session]);
 
   return (
     <div className="flex items-center pb-2">

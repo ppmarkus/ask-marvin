@@ -2,9 +2,8 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{jsx,tsx}',
+    './app/**/*.{jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -12,11 +11,7 @@ const config: Config = {
 
       },
       colors: {
-        'marvingreen': '#2c634f',
-        'marvinprimary-500': '#2c5c63',
-        'marvinprimary-300': '#33A5B1',
-        'marvinprimary-100': '#C3E9ED',
-        'marvinblue': '#2c4163',
+
       },
     },
   },

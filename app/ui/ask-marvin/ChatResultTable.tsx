@@ -106,7 +106,7 @@ function ChatResultTable(tableData: any) {
   }, []);
 
   return (
-    <Box>
+    <div className="mb-4">
       <Box
         sx={{
           display: "flex",
@@ -141,7 +141,7 @@ function ChatResultTable(tableData: any) {
             alignSelf: "flex-end",
           }}
         >
-          <button onClick={onBtExport} className="flex hover:bg-gray-100 my-2 px-2 rounded flex items-center border-2 text-sm">
+          <button onClick={onBtExport} className="flex hover:bg-gray-100 my-2 px-2 rounded items-center border-2 text-sm">
             <DocumentArrowDownIcon className="h-4 w-4 mr-2" />
             Export to CSV
           </button>
@@ -150,7 +150,7 @@ function ChatResultTable(tableData: any) {
       <div style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }} className="ag-theme-balham">
         <AgGridReact rowHeight={heightOfRow} ref={gridRef} columnDefs={columnDefs} defaultColDef={defaultColDef} rowData={rowData}></AgGridReact>
       </div>
-    </Box>
+    </div>
   );
 }
 

@@ -28,7 +28,7 @@ export default function ChatQuestionAnswerUnit(props: ChatQuestionAnswerUnitType
   } = props;
 
   return (
-    <Box style={{ backgroundColor: is_odd ? "#EEEEEE" : "", padding: "20px", borderTop: "2px #CCCCCC solid" }}>
+    <div className={`bg-${is_odd ? "bg-gray-400 border-gray-200 border-x-0 border-y-0 border-dotted" : "white"} p-4 border-y-2 border-gray-300`}>
       <UserInputPromptSent question={question!} />
 
       <ChatResult
@@ -49,6 +49,6 @@ export default function ChatQuestionAnswerUnit(props: ChatQuestionAnswerUnitType
         not_like_rating={not_like_rating}
         setHasUpdate={setHasUpdate}
       />
-    </Box>
+    </div>
   );
 }

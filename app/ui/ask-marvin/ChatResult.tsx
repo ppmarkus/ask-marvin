@@ -137,12 +137,12 @@ export default function ChatResult(props: ChatResultProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+    <div className="bg-white rounded-lg shadow-md p-4 mb-2">
       {answer_text && (
-        <div className="flex flex-col">
-          <div className="flex flex-row items-center">
-            <div className="font-bold min-w-10em w-10em">Answer:</div>
-            <div className="flex-grow">{answer_text}</div>
+        <div className="flex flex-col pb-4">
+          <div className="flex flex-row items-center align-top">
+            <div className="font-bold min-w-10em w-10em mr-2">Answer:</div>
+            <div className="flex-grow text-sm">{answer_text}</div>
           </div>
         </div>
       )}
@@ -151,7 +151,7 @@ export default function ChatResult(props: ChatResultProps) {
           <ChatResultTable tableData={JSON.parse(answer_table)} />
         </div>
       ) : null}
-      <div className="mt-2 text-gray-500 text-xs bg-white rounded-lg shadow-md p-4">
+      <div className=" text-gray-500 text-xs p-0 ">
         <div className="grid grid-cols-3 grid-rows-2 gap-0">
           {answer_total_tokens ? (
             <div className="flex">

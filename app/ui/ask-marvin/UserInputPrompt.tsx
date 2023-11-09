@@ -6,33 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputAdornment, TextField } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 
-// import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
 
 export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
   const { chat_question, set_chat_question, chatQuestionAnswerUnits, setChatQuestionAnswerUnits, setHasUpdate, setHasError, setErrorMessage } = props;
   const [sessionUserName, setSessionUserName] = useState<string | null>("");
   const [sessionUserEmail, setSessionUserEmail] = useState<string | null>("");
-  // const { data: session } = useSession();
   const [promptHasText, setPromptHasText] = useState<string>("inherit");
   const inputQuestionRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [textLength, setTextLength] = useState<number>(0);
   const [dataLoading, setDataLoading] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   if (session) {
-  //     if (session.user) {
-  //       const loggedinusername: string = session.user.name!;
-  //       setSessionUserEmail(session.user.email!);
-  //       if (loggedinusername.indexOf(" ") > 0) {
-  //         const username = session.user.name?.substring(0, session.user.name.indexOf(" "))!;
-  //         setSessionUserName(username);
-  //       } else {
-  //         setSessionUserName(loggedinusername);
-  //       }
-  //     }
-  //   }
-  // }, [session]);
 
   async function askQuestionToMarvin(question: string) {
     set_chat_question(question);
@@ -58,9 +41,7 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
       body: JSON.stringify(entry),
     });
     const data = await response.json();
-    // console.log("Got response from Marvin");
-    // console.log(data);
-    // instantiate a new ChatQuestionAnswerUnitProps
+
     const newChatQuestionAnswerUnit: ChatQuestionAnswerUnitType = {
       id: data["id"],
       question: data["question"],
@@ -80,7 +61,6 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
       not_like_rating: false,
       setHasUpdate: setHasUpdate,
     };
-    // console.log(newChatQuestionAnswerUnit);
     setHasUpdate(true);
 
     setChatQuestionAnswerUnits([...chatQuestionAnswerUnits, newChatQuestionAnswerUnit]);
@@ -132,7 +112,7 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
   return (
     <div className="flex w-full">
       {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
-      <div className="flex-none fixed bottom-0 left-0 md:left-64 right-0 p-2 flex-col bg-gray-200 border-t-2 border-r-2 border-grey-100">
+      <div className="flex-none fixed bottom-0 left-0 md:left-64 right-0 p-2 flex-col bg-teal-50 border-t-2 border-r-2 border-grey-100">
         <TextField
           placeholder={"Ask me a question about Rockhampton. Try to be specific (including dates)."}
           fullWidth
