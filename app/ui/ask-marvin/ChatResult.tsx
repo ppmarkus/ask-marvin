@@ -109,11 +109,6 @@ export default function ChatResult(props: ChatResultProps) {
     setIsCollapsed(!isCollapsed);
   };
 
-  const handleCopyClick = () => {
-    if (!answer_sql) return;
-    navigator.clipboard.writeText(answer_sql);
-  };
-
   const handleLikeClick = () => {
     if (liked) {
       setLiked(false);

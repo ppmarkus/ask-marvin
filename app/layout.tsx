@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { SessionProvider } from "next-auth/react";
-import Image from "next/image";
 
+import { exo2, orbitron } from "@/app/ui/fonts";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -18,10 +14,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // <SessionProvider>
-    <html lang="en">
+    <html lang="en" className={`${exo2.variable} ${orbitron.variable}`}>
       <body className="flex flex-col min-h-screen">
         <header></header>
-        <main className={`grow ${inter.className}`}>{children}</main>
+        <main className="grow">{children}</main>
       </body>
     </html>
     // </SessionProvider>

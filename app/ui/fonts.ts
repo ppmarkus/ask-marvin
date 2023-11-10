@@ -1,5 +1,11 @@
-import { Inter, Open_Sans } from 'next/font/google'
+import { Exo_2, Orbitron} from 'next/font/google'
 
-export const inter = Inter({subsets: ['latin']})
+export const exo2 = Exo_2({
+  subsets: ["latin"],
+  variable: "--font-exo-2"
+})
 
-export const open_sans = Open_Sans({weight: ['400','700'], subsets: ['latin']})
+export const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron"
+})

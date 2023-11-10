@@ -1,15 +1,10 @@
-import Box from "@mui/material/Box";
 // import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
-import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
 // import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-// import InputAdornment from "@mui/material/InputAdornment";
-import Tooltip from "@mui/material/Tooltip";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
-import { InputAdornment, Snackbar } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Snackbar } from "@mui/material";
 
 interface UserInputPromptProps {
   question: string;
@@ -25,30 +20,30 @@ function UserInputPromptSent(props: UserInputPromptProps): JSX.Element {
     <div className="flex items-center pb-2">
       {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
       <div className="flex-grow rounded-md">
-        <TextField
-          fullWidth
-          disabled={true}
-          value={question}
-          size="small"
-          variant="outlined"
-          style={{ backgroundColor: "#FFFFFF", borderRadius: "0.25rem" }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip title="Copy Question">
-                  <FontAwesomeIcon
-                    icon={faCopy}
-                    onClick={() => {
-                      navigator.clipboard.writeText(question);
-                      setIsCopied(true);
-                    }}
-                    style={{ cursor: "pointer" }}
-                  />
-                </Tooltip>
-              </InputAdornment>
-            ),
-          }}
-        />
+        <div className="w-full relative">
+          <input
+            type="text"
+            className="w-full border border-gray-300 rounded-md py-2 px-3 bg-white text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            value={question}
+            disabled
+          />
+          <button
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 focus:outline-none"
+            onClick={() => {
+              navigator.clipboard.writeText(question);
+              setIsCopied(true);
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faCopy}
+              className="text-gray-400 hover:text-gray-500"
+              onClick={() => {
+                navigator.clipboard.writeText(question);
+                setIsCopied(true);
+              }}
+            />
+          </button>
+        </div>
       </div>
       <Snackbar
         open={isCopied}

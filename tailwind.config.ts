@@ -7,6 +7,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-exo-2)', 'sans-serif'],
+        exo2: ['var(--font-exo-2)', 'sans-serif'],
+      },
       backgroundImage: {
 
       },
