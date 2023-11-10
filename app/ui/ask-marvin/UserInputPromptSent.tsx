@@ -24,14 +24,14 @@ function UserInputPromptSent(props: UserInputPromptProps): JSX.Element {
   return (
     <div className="flex items-center pb-2">
       {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
-      <div className="flex-grow">
+      <div className="flex-grow rounded-md">
         <TextField
           fullWidth
           disabled={true}
           value={question}
           size="small"
           variant="outlined"
-          style={{ backgroundColor: "#FFFFFF" }}
+          style={{ backgroundColor: "#FFFFFF", borderRadius: "0.25rem" }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
