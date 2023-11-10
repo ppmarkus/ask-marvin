@@ -140,9 +140,8 @@ export default function ChatResult(props: ChatResultProps) {
     <div className="bg-white rounded-lg shadow-md p-4 mb-2">
       {answer_text && (
         <div className="flex flex-col pb-4">
-          <div className="flex flex-row items-center align-top">
-            <div className="font-bold min-w-10em w-10em mr-2">Answer:</div>
-            <div className="flex-grow text-sm">{answer_text}</div>
+          <div className="flex flex-row items-start text-gray-600">
+            <div className="flex-grow">{answer_text}</div>
           </div>
         </div>
       )}
