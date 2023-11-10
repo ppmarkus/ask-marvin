@@ -107,46 +107,32 @@ function ChatResultTable(tableData: any) {
 
   return (
     <div className="mb-4">
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignContent: "flex-start",
-          alignItems: "left",
-        }}
-      >
-        <TextField
-          id="filter-broker-recommendation-table"
-          variant="standard"
-          placeholder="Filter"
-          onInput={onFilterTextFieldChanged}
-          InputProps={{
-            style: {
-              fontSize: "0.9em",
-              paddingBottom: "3px",
-              marginBottom: "10px",
-              width: "300px",
-            },
-            startAdornment: <MagnifyingGlassIcon className="h-5 w-5 text-gray-300" />,
-          }}
-        />
-        <Box sx={{ flexGrow: 1 }}></Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignContent: "flex-end",
-            alignItems: "right",
-            padding: 0,
-            margin: 0,
-            alignSelf: "flex-end",
-          }}
-        >
+      <div className="flex flex-wrap content-start items-left">
+        <div className="font-bold hidden sm:block">
+          <TextField
+            id="filter-broker-recommendation-table"
+            variant="standard"
+            placeholder="Filter"
+            onInput={onFilterTextFieldChanged}
+            InputProps={{
+              style: {
+                fontSize: "0.9em",
+                paddingBottom: "3px",
+                marginBottom: "10px",
+                width: "200px",
+              },
+              startAdornment: <MagnifyingGlassIcon className="h-5 w-5 text-gray-300" />,
+            }}
+          />
+        </div>
+        <div className="grow"></div>
+        <div className="hidden md:flex md:items-end justify-end p-0 m-0 self-end sm:block">
           <button onClick={onBtExport} className="flex hover:bg-gray-100 my-2 px-2 rounded items-center border-2 text-sm">
             <DocumentArrowDownIcon className="h-4 w-4 mr-2" />
             Export to CSV
           </button>
-        </Box>
-      </Box>
+        </div>
+      </div>
       <div style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }} className="ag-theme-balham">
         <AgGridReact rowHeight={heightOfRow} ref={gridRef} columnDefs={columnDefs} defaultColDef={defaultColDef} rowData={rowData}></AgGridReact>
       </div>

@@ -28,7 +28,7 @@ export default function ChatQuestionAnswerUnit(props: ChatQuestionAnswerUnitType
   } = props;
 
   return (
-    <div className={`bg-${is_odd ? "bg-gray-400 border-gray-200 border-x-0 border-y-0 border-dotted" : "white"} p-4 border-y-2 border-gray-300`}>
+    <div className={`${is_odd ? "bg-transparent border-gray-200 border-x-0 border-y-0" : "bg-white rounded-lg"} p-4`}>
       <UserInputPromptSent question={question!} />
 
       <ChatResult

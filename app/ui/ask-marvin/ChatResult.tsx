@@ -151,8 +151,8 @@ export default function ChatResult(props: ChatResultProps) {
           <ChatResultTable tableData={JSON.parse(answer_table)} />
         </div>
       ) : null}
-      <div className=" text-gray-500 text-xs p-0 ">
-        <div className="grid grid-cols-3 grid-rows-2 gap-0">
+      <div className="flex text-gray-400 text-xs p-0 ">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 grow">
           {answer_total_tokens ? (
             <div className="flex">
               <div className="font-bold pr-2">Tokens:</div>
@@ -178,6 +178,7 @@ export default function ChatResult(props: ChatResultProps) {
           ) : (
             <div className="flex"></div>
           )}
+
           {sql_generation_status ? (
             <div className="flex">
               <div className="font-bold pr-2">Valid SQL?</div>
@@ -217,67 +218,70 @@ export default function ChatResult(props: ChatResultProps) {
             </div>
           </div>
         </div>
+        <div className="hidden sm:flex sm:items-end">
+          <div className="grow"></div>
+          <Button size="small" className="py-0" onClick={handleCollapseClick}>
+            {isCollapsed ? "Show SQL" : "Hide SQL"}
+          </Button>
+        </div>
       </div>
 
-      {answer_sql && (
-        <div>
-          <div className="flex flex-row items-center">
-            <div className="flex-grow"></div>
-            <Button size="small" className="mt-4 py-0" onClick={handleCollapseClick}>
-              {isCollapsed ? "Show SQL" : "Hide SQL"}
-            </Button>
-          </div>
-          {!isCollapsed && (
-            <>
-              <div className="w-full">
-                {isEditing ? (
-                  <div className="flex items-center">
-                    <TextField multiline maxRows={10} label="SQL Query" variant="outlined" size="small" value={editedSqlQuery} onChange={handleInputChange} className="flex-grow" />
-                    <Button onClick={handleCancelClick} className="ml-1">
-                      Cancel
-                    </Button>
-                    <Button color="error" onClick={handleSaveClick} className="ml-1">
-                      Save
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="flex items-center border-t border-gray-300 pt-2">
-                    <Box sx={{ flexGrow: 1 }}>
-                      <SyntaxHighlighter
-                        customStyle={{
-                          marginTop: 0,
-                          backgroundColor: is_odd ? "#CCCCCC" : "#EEEEEE",
-                        }}
-                        useInlineStyles={true}
-                        wrapLongLines={true}
-                        wrapLines={true}
-                        language="sql"
-                        style={atomOneLight}
-                      >
-                        {answer_sql}
-                      </SyntaxHighlighter>
-                    </Box>
-                    <Tooltip title="Copy Question">
-                      <FontAwesomeIcon
-                        icon={faCopy}
-                        color="gray"
-                        onClick={() => {
-                          navigator.clipboard.writeText(answer_sql);
-                          setIsCopied(true);
-                        }}
-                        className="cursor-pointer ml-2"
-                      />
-                    </Tooltip>
-                    <Button size="small" onClick={handleEditClick} className="ml-1">
-                      Edit
-                    </Button>
-                  </div>
-                )}
+      <div className="font-bold hidden sm:block flex-shrink:0 ">
+        {answer_sql && (
+          <div>
+            {!isCollapsed && (
+              <div>
+                <div className="min-w-min lg:w-full">
+                  {isEditing ? (
+                    <div className="flex items-center">
+                      <TextField multiline maxRows={10} label="SQL Query" variant="outlined" size="small" value={editedSqlQuery} onChange={handleInputChange} className="grow" />
+                      <Button onClick={handleCancelClick} className="ml-1 text-xs text-red-600">
+                        Cancel
+                      </Button>
+                      {/* <Button color="error" onClick={handleSaveClick} className="ml-1">
+                        Save
+                      </Button> */}
+                    </div>
+                  ) : (
+                    <div className="flex items-center border-t border-gray-300 pt-2">
+                      <div className="grow w-80">
+                        <SyntaxHighlighter
+                          customStyle={{
+                            marginTop: 0,
+                            minWidth: 250,
+                            backgroundColor: is_odd ? "#EEEEEE" : "#EEEEEE",
+                          }}
+                          useInlineStyles={true}
+                          wrapLongLines={true}
+                          wrapLines={true}
+                          language="sql"
+                          style={atomOneLight}
+                        >
+                          {answer_sql}
+                        </SyntaxHighlighter>
+                      </div>
+                      <Tooltip title="Copy Question">
+                        <FontAwesomeIcon
+                          icon={faCopy}
+                          color="gray"
+                          onClick={() => {
+                            navigator.clipboard.writeText(answer_sql);
+                            setIsCopied(true);
+                          }}
+                          className="cursor-pointer ml-2"
+                        />
+                      </Tooltip>
+                      <Button size="small" onClick={handleEditClick} className="ml-1 text-xs">
+                        Raw Text
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </div>
-            </>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
       {error_message && (
         <Alert className="mt-4" severity="error">
           {error_message}
