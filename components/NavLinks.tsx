@@ -11,13 +11,13 @@ import { usePathname } from "next/navigation";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: "Query", href: "/ask-marvin", icon: faMagnifyingGlass },
+  { name: "Query", href: "/", icon: faMagnifyingGlass },
   {
     name: "History",
-    href: "/ask-marvin/history",
+    href: "/history",
     icon: faClock,
   },
-  { name: "Settings", href: "/ask-marvin/settings", icon: faCog },
+  { name: "Settings", href: "/settings", icon: faCog },
 ];
 
 export default function NavLinks() {

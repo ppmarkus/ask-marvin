@@ -1,16 +1,16 @@
 "use client";
 
-import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
+// import { authenticate } from "@/app/lib/actions";
 import { MarvinLoginButton } from "@/components/MarvinLoginButton";
-import { useFormState, useFormStatus } from "react-dom";
-import { authenticate } from "@/app/lib/actions";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { AtSymbolIcon, ExclamationCircleIcon, KeyIcon } from "@heroicons/react/24/outline";
+import { useFormState } from "react-dom";
 
 export default function LoginForm() {
-  const [code, action] = useFormState(authenticate, undefined);
+  // const [code, action] = useFormState(authenticate, undefined);
 
   return (
-    <form action={action} className="space-y-3">
+    <form className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className="mb-3 text-2xl">Please log in to continue.</h1>
         <div className="w-full">

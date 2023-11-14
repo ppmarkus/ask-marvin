@@ -1,6 +1,3 @@
-// import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-
-// import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

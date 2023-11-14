@@ -1,11 +1,18 @@
 "use client";
+import ThemeButton from "@/components/ThemeButton";
 import React, { useState } from "react";
+// import { useTheme } from "next-themes";
 
 export default function Page() {
+  // const { theme, setTheme } = useTheme();
+
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
+    const currTheme = isDarkMode ? "dark" : "light";
+    console.log("toggling dark mode. Current mode is: ", currTheme);
+    // setTheme(isDarkMode ? "light" : "dark");
   };
 
   return (
@@ -24,6 +31,9 @@ export default function Page() {
             </label>
           </div>
         </div>
+      </div>
+      <div>
+        <ThemeButton />
       </div>
       <div className="grow ">
         <div className="bg-white shadow-md rounded-md p-4">
