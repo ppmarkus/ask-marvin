@@ -11,14 +11,13 @@
 .dark {
   --foreground-rgb: 253, 246, 227; /* base3 */
   --background-start-rgb: 33, 33, 33; /* base02 */
-  --background-end-rgb: 7, 54, 66; /* base01 */
+  --background-end-rgb: 4,47,46; /* base01 */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
     to bottom,
-
     rgb(var(--background-start-rgb)),
     rgb(var(--background-end-rgb))
   );
@@ -34,12 +33,12 @@ body {
 
 
 .ag-theme-balham-dark .ag-row-odd {
-  background: #111827 !important;
+  background: #0f172a !important;
   border: 1px solid #333 !important;
 }
 
 
 .ag-theme-balham-dark .ag-row-even {
-  background: #171717 !important;
+  background: #1e293b !important;
   border: 1px solid #333 !important;
 }

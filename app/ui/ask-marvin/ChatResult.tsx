@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import ChatResultTable from "./ChatResultTable";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { useTheme } from 'next-themes'
 
 import { ChatResultProps, DataUpdateStatus } from "@/app/lib/definitions";
 import { Alert, Box, Button, IconButton, Snackbar, TextField, Tooltip } from "@mui/material";
@@ -31,6 +32,7 @@ export default function ChatResult(props: ChatResultProps) {
     setHasUpdate,
   } = props;
 
+  const { theme } = useTheme()
   const [isMounted, setIsMounted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedSqlQuery, setEditedSqlQuery] = useState(answer_sql);
@@ -135,7 +137,7 @@ export default function ChatResult(props: ChatResultProps) {
     <div className="bg-white rounded-lg shadow-md p-4 mb-2 dark:bg-slate-900">
       {answer_text && (
         <div className="flex flex-col pb-4">
-          <div className="flex flex-row items-start text-gray-600">
+          <div className="flex flex-row items-start text-gray-400">
             <div className="flex-grow">{answer_text}</div>
           </div>
         </div>
@@ -249,7 +251,7 @@ export default function ChatResult(props: ChatResultProps) {
                           wrapLongLines={true}
                           wrapLines={true}
                           language="sql"
-                          style={atomOneLight}
+                          style={theme === 'dark' ? atomOneDark: atomOneLight}
                         >
                           {answer_sql}
                         </SyntaxHighlighter>

@@ -135,7 +135,7 @@ function ChatResultTable(tableData: any) {
           </button>
         </div>
       </div>
-      <div className={`ag-theme-balham ${theme === 'dark' ? 'ag-theme-balham-dark' : ''}`}  style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }}>
+      <div className={`${theme === 'dark' ? 'ag-theme-balham-dark' : 'ag-theme-balham'}`}  style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }}>
         <AgGridReact rowHeight={heightOfRow} ref={gridRef} columnDefs={columnDefs} defaultColDef={defaultColDef} rowData={rowData}></AgGridReact>
       </div>
     </div>

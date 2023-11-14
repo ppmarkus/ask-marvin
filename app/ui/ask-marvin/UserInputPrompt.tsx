@@ -112,7 +112,7 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
   return (
     <div className="flex w-full">
       {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
-      <div className="flex-none fixed bottom-0 left-0 md:left-64 right-0 p-2 flex-col bg-teal-50 dark:bg-sky-950 border-t-2 dark:border-0 border-r-2 border-grey-100">
+      <div className="flex-none fixed bottom-0 left-0 md:left-64 right-0 p-2 flex-col bg-teal-50 dark:bg-teal-950 border-t-2 dark:border-0 border-r-2 border-grey-100">
         <TextField
           placeholder={"Ask me a question about Rockhampton. Try to be specific (including dates)."}
           fullWidth
@@ -126,7 +126,7 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
           onChange={handleInputChange}
           color="primary"
           focused
-          className="mr-8 dark:bg-slate-900"
+          className="mr-8 bg-white dark:bg-slate-900"
           InputProps={{
             className: "dark:text-slate-300",
             endAdornment: (
