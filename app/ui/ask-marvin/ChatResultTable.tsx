@@ -1,14 +1,14 @@
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 
+import { CellValueNumberColorClassDecider } from "@/app/lib/aggridCellFunctions";
+import { FloatCellRenderer4DecimalsPadded, prettyFormatFloat2Decimals, prettyFormatIntegers } from "@/app/lib/aggridFormatters";
+import { DocumentArrowDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import TextField from "@mui/material/TextField";
 import { ColDef } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react/lib/agGridReact";
+import { useTheme } from 'next-themes'
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { MagnifyingGlassIcon, DocumentArrowDownIcon } from "@heroicons/react/24/outline";
-import { FloatCellRenderer4DecimalsPadded, prettyFormatFloat2Decimals, prettyFormatIntegers } from "@/app/lib/aggridFormatters";
-import { CellValueNumberColorClassDecider } from "@/app/lib/aggridCellFunctions";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 
 type RowData = {
   id: string;
@@ -22,6 +22,7 @@ function ChatResultTable(tableData: any) {
   const [rowData, setRowData] = useState<RowData[]>([]);
   const gridRef = useRef<AgGridReact>(null);
   const [tableHeight, setTableHeight] = useState<number>(0);
+  const { theme } = useTheme()
 
   useEffect(() => {
     // Generate column definitions based on the data
@@ -115,6 +116,7 @@ function ChatResultTable(tableData: any) {
             placeholder="Filter"
             onInput={onFilterTextFieldChanged}
             InputProps={{
+              className: "dark:text-slate-300",
               style: {
                 fontSize: "0.9em",
                 paddingBottom: "3px",
@@ -127,13 +129,13 @@ function ChatResultTable(tableData: any) {
         </div>
         <div className="grow"></div>
         <div className="hidden md:flex md:items-end justify-end p-0 m-0 self-end sm:block">
-          <button onClick={onBtExport} className="flex hover:bg-gray-100 my-2 px-2 rounded items-center border-2 text-sm">
+          <button onClick={onBtExport} className="flex hover:bg-gray-100 dark:hover:bg-slate-800 my-2 px-2 rounded items-center border-2 dark:border-slate-700 text-sm">
             <DocumentArrowDownIcon className="h-4 w-4 mr-2" />
             Export to CSV
           </button>
         </div>
       </div>
-      <div style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }} className="ag-theme-balham">
+      <div className={`ag-theme-balham ${theme === 'dark' ? 'ag-theme-balham-dark' : ''}`}  style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }}>
         <AgGridReact rowHeight={heightOfRow} ref={gridRef} columnDefs={columnDefs} defaultColDef={defaultColDef} rowData={rowData}></AgGridReact>
       </div>
     </div>

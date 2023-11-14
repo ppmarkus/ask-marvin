@@ -140,7 +140,7 @@ function MarvinMainChatPanel() {
   }
 
   return (
-    <div id="marvinchatwindow" className="w-full h-full flex flex-col justify-between">
+    <div id="marvinchatwindow" className="w-full h-full flex flex-col justify-between ">
       <div className="overflow-auto pb-64">
         {dataLoading ? (
           <div className="ml-10">

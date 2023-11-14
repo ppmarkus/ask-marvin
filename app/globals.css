@@ -8,20 +8,38 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.dark {
+  --foreground-rgb: 253, 246, 227; /* base3 */
+  --background-start-rgb: 33, 33, 33; /* base02 */
+  --background-end-rgb: 7, 54, 66; /* base01 */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to bottom,
+
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+}
+
+.ag-root-wrapper {
+  --ag-header-background-color: transparent;
+}
+.ag-theme-balham-dark .ag-header-cell {
+  border-right: 1px solid #111;
+  background-color: #111827;
+}
+
+
+.ag-theme-balham-dark .ag-row-odd {
+  background: #111827 !important;
+  border: 1px solid #333 !important;
+}
+
+
+.ag-theme-balham-dark .ag-row-even {
+  background: #171717 !important;
+  border: 1px solid #333 !important;
 }

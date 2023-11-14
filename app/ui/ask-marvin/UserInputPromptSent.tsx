@@ -20,7 +20,7 @@ function UserInputPromptSent(props: UserInputPromptProps): JSX.Element {
         <div className="w-full relative">
           <input
             type="text"
-            className="w-full border border-gray-300 rounded-md py-2 px-3 bg-white text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full border border-gray-300 dark:border-gray-700 dark:bg-slate-900 dark:text-slate-200 rounded-md py-2 px-3 bg-white text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             value={question}
             disabled
           />

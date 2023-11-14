@@ -9,7 +9,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { ChatResultProps, DataUpdateStatus } from "@/app/lib/definitions";
 import { Alert, Box, Button, IconButton, Snackbar, TextField, Tooltip } from "@mui/material";
 import { atomOneDark, atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { sql } from "@vercel/postgres";
+
 
 export default function ChatResult(props: ChatResultProps) {
   const {
@@ -132,7 +132,7 @@ export default function ChatResult(props: ChatResultProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-2">
+    <div className="bg-white rounded-lg shadow-md p-4 mb-2 dark:bg-slate-900">
       {answer_text && (
         <div className="flex flex-col pb-4">
           <div className="flex flex-row items-start text-gray-600">
@@ -146,7 +146,7 @@ export default function ChatResult(props: ChatResultProps) {
         </div>
       ) : null}
       <div className="flex text-gray-400 text-xs p-0 ">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 grow">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 grow ">
           {answer_total_tokens ? (
             <div className="flex">
               <div className="font-bold pr-2">Tokens:</div>
@@ -200,13 +200,13 @@ export default function ChatResult(props: ChatResultProps) {
 
           <div className="flex">
             <div className="flex flex-row items-center">
-              <div className="font-bold min-w-150px w-10em pr-2">評価/Rating:</div>
+              <div className="font-bold min-w-150px w-10em pr-2 ">評価/Rating:</div>
               <div>
                 <IconButton size="small" onClick={() => handleLikeClick()}>
-                  <FontAwesomeIcon style={{ color: liked ? "green" : "" }} size="sm" icon={faThumbsUp} />
+                  <FontAwesomeIcon style={{ color: liked ? "green" : "" }} className="dark:text-slate-400" size="sm" icon={faThumbsUp} />
                 </IconButton>
                 <IconButton style={{ marginLeft: "0.5em" }} size="small" onClick={() => handleNotLikeClick()}>
-                  <FontAwesomeIcon style={{ color: notLiked ? "red" : "" }} className="marvinratingicon" size="sm" icon={faThumbsDown} />
+                  <FontAwesomeIcon style={{ color: notLiked ? "red" : "" }} className="marvinratingicon dark:text-slate-400" size="sm" icon={faThumbsDown} />
                 </IconButton>
               </div>
             </div>
@@ -277,7 +277,7 @@ export default function ChatResult(props: ChatResultProps) {
         )}
       </div>
       {error_message && (
-        <Alert className="mt-4" severity="error">
+        <Alert className="mt-4 dark:bg-red-950 dark:text-red-600" severity="error">
           {error_message}
         </Alert>
       )}

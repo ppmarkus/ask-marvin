@@ -6,16 +6,16 @@ import ThemeButton from "./ThemeButton";
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col px-3 pb-4 md:px-2">
-      <Link className="mb-2 flex h-20 items-end justify-start rounded-md bg-teal-600 p-4 md:h-40" href="/">
+    <div className="flex h-full flex-col px-3 pb-4 md:px-2 bg-gradient-to-b from-[var(--background-start)] to-[var(--background-end)] text-[var(--foreground)]">
+      <Link className="mb-2 flex h-20 items-end justify-start rounded-md bg-teal-600 dark:bg-cyan-950  p-4 md:h-40" href="/">
         <div className="w-32 text-white md:w-40">
           <MarvinLogo />
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-        <ThemeButton />
+        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block dark:bg-gray-900"></div>
+       
         <div className="hidden md:inline-flex p-2 gap-2 justify-center align-middle text-xs">
           <div className="">Powered by</div>
           <div>
@@ -24,19 +24,22 @@ export default function SideNav() {
             </a>
           </div>
         </div>
-        <form
-          className="flex md:flex-col"
-          action={async () => {
-            "use server";
-            // await signOut();
-            console.log("signing out...");
-          }}
-        >
-          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 dark:bg-gray-800 p-3 text-sm font-medium hover:bg-teal-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-            <PowerIcon className="w-6" />
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
+        <div className="flex">
+          <form
+            className="flex md:flex-col md:grow"
+            action={async () => {
+              "use server";
+              // await signOut();
+              console.log("signing out...");
+            }}
+          >
+            <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-teal-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3 mr-2 dark:bg-slate-900 dark:hover:text-green-300">
+              <PowerIcon className="w-6" />
+              <div className="hidden md:block">Sign Out</div>
+            </button>
+          </form>
+          <ThemeButton />
+        </div>
       </div>
     </div>
   );
