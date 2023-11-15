@@ -211,11 +211,9 @@ const table_data_demo2 = [
 const chat_qestion_answer_data = [
   {
     id: "1",
-    question: "What is the attribution and alpha for Rockhampton for the current month?",
+    question: "What is the attribution and alpha for the current month?",
     isDataLoading: false,
-    answer_text: "The attribution for Rockhampton for the current month (2023-08) is approximately 0.0153 and the alpha is approximately 0.0165.",
-    answer_sql:
-      "SELECT DATE_FORMAT(processDate, '%Y-%m') AS Date, SUM(RHAttribution) AS RHAttribution, SUM(RHMktAlpha) AS RHAlpha FROM t05PortfolioResponsibilities WHERE DATE_FORMAT(processDate, '%Y-%m') = '2023-08' GROUP BY DATE_FORMAT(processDate, '%Y-%m')",
+    answer_text: "The attribution for the current month (2023-08) is approximately 0.0153 and the alpha is approximately 0.0165.",
     answer_table: null,
     answer_time_taken: 3.5687,
     answer_total_cost: 0.0002,
@@ -229,14 +227,40 @@ const chat_qestion_answer_data = [
   },
   {
     id: "2",
-    question: "What is the RH Daily Beta for August 2023?",
+    question: "Give me the up coming earnings date/time and estimated EPS for our holding positions?",
+    isDataLoading: false,
+    answer_table: JSON.stringify(table_data_demo2),
+    answer_sql:
+      "SELECT \n" + 
+      "    processDate, \n" +
+      "    sum(if(side='S',-1,1)*beta*t05PortfolioResponsibilities.RHExposure) as RH_Beta \n" +
+      "FROM t05PortfolioResponsibilities \n" +
+      "WHERE processDate between '2023-07-01' and '2023-07-31' \n" +
+      "GROUP BY processDate \n" +
+      "ORDER BY processDate",
+    answer_time_taken: 3.159,
+    answer_total_cost: 0.0001,
+    answer_total_tokens: 1500,
+    answer_confidence_score: 0.95,
+    question_ask_date: "2023-07-01T12:31:58",
+    is_odd: false,
+    like_rating: false,
+    not_like_rating: false,
+    sql_generation_status: "VALID",
+  },
+    {
+    id: "3",
+    question: "What is the Fund Daily Beta for August 2023?",
     isDataLoading: false,
     answer_table: JSON.stringify(table_data_demo),
     answer_sql:
-      "select processDate,sum(if(side='S',-1,1)*beta*t05PortfolioResponsibilities.RHExposure) as RHSensitivity " +
-      "from t05PortfolioResponsibilities " +
-      " where processDate between '2023-07-01' and '2023-07-31' " +
-      " group by processDate order by processDate",
+      "SELECT \n" + 
+      "    processDate, \n" +
+      "    sum(if(side='S',-1,1)*beta*t05PortfolioResponsibilities.RHExposure) as RH_Beta \n" +
+      "FROM t05PortfolioResponsibilities \n" +
+      "WHERE processDate between '2023-07-01' and '2023-07-31' \n" +
+      "GROUP BY processDate \n" +
+      "ORDER BY processDate",
     answer_time_taken: 3.159,
     answer_total_cost: 0.0001,
     answer_total_tokens: 1500,
@@ -248,28 +272,8 @@ const chat_qestion_answer_data = [
     sql_generation_status: "VALID",
   },
   {
-    id: "3",
-    question: "What is the RH Daily Beta for August 2023?",
-    isDataLoading: false,
-    answer_table: JSON.stringify(table_data_demo2),
-    answer_sql:
-      "select processDate,sum(if(side='S',-1,1)*beta*t05PortfolioResponsibilities.RHExposure) as RHSensitivity " +
-      "from t05PortfolioResponsibilities " +
-      " where processDate between '2023-07-01' and '2023-07-31' " +
-      " group by processDate order by processDate",
-    answer_time_taken: 3.159,
-    answer_total_cost: 0.0001,
-    answer_total_tokens: 1500,
-    answer_confidence_score: 0.95,
-    question_ask_date: "2023-07-01T12:31:58",
-    is_odd: false,
-    like_rating: false,
-    not_like_rating: false,
-    sql_generation_status: "VALID",
-  },
-  {
     id: "4",
-    question: "What is the monthly Beta RH/YA processDate between '2008-01-01' and '2012-01-01'?",
+    question: "What is the monthly Beta for FundA and between '2008-01-01' and '2012-01-01'?",
     answer_table: null,
     isDataLoading: true,
     answer_time_taken: 85.598,
@@ -285,8 +289,9 @@ const chat_qestion_answer_data = [
   },
   {
     id: "5",
-    question: "What is the monthly Beta RH/YA processDate between '2008-01-01' and '2012-01-01'?",
+    question: "Will we make a lot of money today?",
     answer_table: null,
+    answer_text: "I'm sorry, I am not sure how to answer that.",
     isDataLoading: true,
     answer_time_taken: 85.598,
     answer_total_cost: 0.048,
@@ -300,9 +305,9 @@ const chat_qestion_answer_data = [
   },
   {
     id: "6",
-    question: "What is the attribution and alpha for Rockhampton for the current month?",
+    question: "What is the attribution and alpha for FundA for the current month?",
     isDataLoading: false,
-    answer_text: "The attribution for Rockhampton for the current month (2023-08) is approximately 0.0153 and the alpha is approximately 0.0165.",
+    answer_text: "The attribution for FundA the current month (2023-08) is approximately 0.0153 and the alpha is approximately 0.0165.",
     answer_sql:
       "SELECT DATE_FORMAT(processDate, '%Y-%m') AS Date, SUM(RHAttribution) AS RHAttribution, SUM(RHMktAlpha) AS RHAlpha FROM t05PortfolioResponsibilities WHERE DATE_FORMAT(processDate, '%Y-%m') = '2023-08' GROUP BY DATE_FORMAT(processDate, '%Y-%m')",
     answer_table: null,

@@ -114,7 +114,7 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
       {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
       <div className="flex-none fixed bottom-0 left-0 md:left-64 right-0 p-2 flex-col bg-teal-50 dark:bg-teal-950 border-t-2 dark:border-0 border-r-2 border-grey-100">
         <TextField
-          placeholder={"Ask me a question about Rockhampton. Try to be specific (including dates)."}
+          placeholder={"Ask me a question about our firm. Try to be specific (including dates)."}
           fullWidth
           multiline
           minRows={2}

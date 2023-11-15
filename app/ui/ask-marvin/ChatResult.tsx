@@ -202,7 +202,7 @@ export default function ChatResult(props: ChatResultProps) {
 
           <div className="flex">
             <div className="flex flex-row items-center">
-              <div className="font-bold min-w-150px w-10em pr-2 ">評価/Rating:</div>
+              <div className="font-bold min-w-150px w-10em pr-2 ">Rating:</div>
               <div>
                 <IconButton size="small" onClick={() => handleLikeClick()}>
                   <FontAwesomeIcon style={{ color: liked ? "green" : "" }} className="dark:text-slate-400" size="sm" icon={faThumbsUp} />
@@ -214,12 +214,13 @@ export default function ChatResult(props: ChatResultProps) {
             </div>
           </div>
         </div>
+        {answer_sql && (
         <div className="hidden sm:flex sm:items-end">
           <div className="grow"></div>
           <Button size="small" className="py-0" onClick={handleCollapseClick}>
             {isCollapsed ? "Show SQL" : "Hide SQL"}
           </Button>
-        </div>
+        </div>)}
       </div>
 
       <div className="font-bold hidden sm:block flex-shrink:0 ">
