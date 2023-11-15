@@ -2,12 +2,19 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 
 import { CellValueNumberColorClassDecider } from "@/app/lib/aggridCellFunctions";
-import { FloatCellRenderer4DecimalsPadded, prettyFormatFloat2Decimals, prettyFormatIntegers } from "@/app/lib/aggridFormatters";
-import { DocumentArrowDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  FloatCellRenderer4DecimalsPadded,
+  prettyFormatFloat2Decimals,
+  prettyFormatIntegers,
+} from "@/app/lib/aggridFormatters";
+import {
+  DocumentArrowDownIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 import TextField from "@mui/material/TextField";
 import { ColDef } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react/lib/agGridReact";
-import { useTheme } from 'next-themes'
+import { useTheme } from "next-themes";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type RowData = {
@@ -22,9 +29,12 @@ function ChatResultTable(tableData: any) {
   const [rowData, setRowData] = useState<RowData[]>([]);
   const gridRef = useRef<AgGridReact>(null);
   const [tableHeight, setTableHeight] = useState<number>(0);
-  const { theme } = useTheme()
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  const { theme } = useTheme();
 
   useEffect(() => {
+    setIsMounted(true);
     // Generate column definitions based on the data
     const enfColDefs = generateColumnDefs(tableData["tableData"]);
     if (enfColDefs) {
@@ -60,7 +70,10 @@ function ChatResultTable(tableData: any) {
               minWidth: 180,
               flex: 1,
             };
-          } else if (key === "quantity" || key.toLowerCase().includes("notional")) {
+          } else if (
+            key === "quantity" ||
+            key.toLowerCase().includes("notional")
+          ) {
             return {
               field: key,
               headerName: key,
@@ -78,7 +91,13 @@ function ChatResultTable(tableData: any) {
               cellRenderer: FloatCellRenderer4DecimalsPadded,
               cellClass: CellValueNumberColorClassDecider,
             };
-          } else if (key.toLowerCase().includes("gross") || key.toLowerCase().includes("net") || key.toLowerCase().includes("Fee") || key.toLowerCase().includes("rate") || key.toLowerCase().includes("comm")) {
+          } else if (
+            key.toLowerCase().includes("gross") ||
+            key.toLowerCase().includes("net") ||
+            key.toLowerCase().includes("Fee") ||
+            key.toLowerCase().includes("rate") ||
+            key.toLowerCase().includes("comm")
+          ) {
             return {
               field: key,
               headerName: key,
@@ -99,7 +118,13 @@ function ChatResultTable(tableData: any) {
 
   // filter broker recommendation table by using text field
   const onFilterTextFieldChanged = useCallback(() => {
-    gridRef.current!.api.setQuickFilter((document.getElementById("filter-broker-recommendation-table") as HTMLInputElement).value);
+    gridRef.current!.api.setQuickFilter(
+      (
+        document.getElementById(
+          "filter-broker-recommendation-table",
+        ) as HTMLInputElement
+      ).value,
+    );
   }, []);
 
   const onBtExport = useCallback(() => {
@@ -108,8 +133,8 @@ function ChatResultTable(tableData: any) {
 
   return (
     <div className="mb-4">
-      <div className="flex flex-wrap content-start items-left">
-        <div className="font-bold hidden sm:block">
+      <div className="items-left flex flex-wrap content-start">
+        <div className="hidden font-bold sm:block">
           <TextField
             id="filter-broker-recommendation-table"
             variant="standard"
@@ -123,21 +148,43 @@ function ChatResultTable(tableData: any) {
                 marginBottom: "10px",
                 width: "200px",
               },
-              startAdornment: <MagnifyingGlassIcon className="h-5 w-5 text-gray-300" />,
+              startAdornment: (
+                <MagnifyingGlassIcon className="h-5 w-5 text-gray-300" />
+              ),
             }}
           />
         </div>
         <div className="grow"></div>
-        <div className="hidden md:flex md:items-end justify-end p-0 m-0 self-end sm:block">
-          <button onClick={onBtExport} className="flex hover:bg-gray-100 dark:hover:bg-slate-800 my-2 px-2 rounded items-center border-2 dark:border-slate-700 text-sm">
-            <DocumentArrowDownIcon className="h-4 w-4 mr-2" />
+        <div className="m-0 hidden justify-end self-end p-0 sm:block md:flex md:items-end">
+          <button
+            onClick={onBtExport}
+            className="my-2 flex items-center rounded border-2 px-2 text-sm hover:bg-gray-100 dark:border-slate-700 dark:hover:bg-slate-800"
+          >
+            <DocumentArrowDownIcon className="mr-2 h-4 w-4" />
             Export to CSV
           </button>
         </div>
       </div>
-      <div className={`${theme === 'dark' ? 'ag-theme-balham-dark' : 'ag-theme-balham'}`}  style={{ flex: "1", boxSizing: "border-box", height: `calc(${tableHeight}px)` }}>
-        <AgGridReact rowHeight={heightOfRow} ref={gridRef} columnDefs={columnDefs} defaultColDef={defaultColDef} rowData={rowData}></AgGridReact>
-      </div>
+      {isMounted && rowData && (
+        <div
+          className={`${
+            theme == "light" ? "ag-theme-balham" : "ag-theme-balham-dark"
+          }`}
+          style={{
+            flex: "1",
+            boxSizing: "border-box",
+            height: `calc(${tableHeight}px)`,
+          }}
+        >
+          <AgGridReact
+            rowHeight={heightOfRow}
+            ref={gridRef}
+            columnDefs={columnDefs}
+            defaultColDef={defaultColDef}
+            rowData={rowData}
+          ></AgGridReact>
+        </div>
+      )}
     </div>
   );
 }

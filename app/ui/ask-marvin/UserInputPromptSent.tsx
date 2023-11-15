@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Snackbar } from "@mui/material";
+import { useState } from "react";
 
 interface UserInputPromptProps {
   question: string;
@@ -15,17 +15,19 @@ function UserInputPromptSent(props: UserInputPromptProps): JSX.Element {
 
   return (
     <div className="flex items-center pb-2">
-      {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
+      {sessionUserName && (
+        <div className="mr-2 font-bold text-teal-600">{sessionUserName}</div>
+      )}
       <div className="flex-grow rounded-md">
-        <div className="w-full relative">
+        <div className="relative w-full">
           <input
             type="text"
-            className="w-full border border-gray-300 dark:border-gray-700 dark:bg-slate-900 dark:text-slate-200 rounded-md py-2 px-3 bg-white text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-slate-900 dark:text-slate-200"
             value={question}
             disabled
           />
           <button
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 focus:outline-none"
+            className="absolute right-2 top-1/2 -translate-y-1/2 transform focus:outline-none"
             onClick={() => {
               navigator.clipboard.writeText(question);
               setIsCopied(true);

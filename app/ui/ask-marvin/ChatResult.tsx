@@ -1,16 +1,29 @@
 "use client";
 
-import { faCopy, faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCopy,
+  faThumbsDown,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import ChatResultTable from "./ChatResultTable";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { useTheme } from 'next-themes'
+import ChatResultTable from "./ChatResultTable";
 
 import { ChatResultProps, DataUpdateStatus } from "@/app/lib/definitions";
-import { Alert, Box, Button, IconButton, Snackbar, TextField, Tooltip } from "@mui/material";
-import { atomOneDark, atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
+import {
+  Alert,
+  Button,
+  IconButton,
+  Snackbar,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+import {
+  atomOneDark,
+  atomOneLight,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export default function ChatResult(props: ChatResultProps) {
   const {
@@ -32,7 +45,7 @@ export default function ChatResult(props: ChatResultProps) {
     setHasUpdate,
   } = props;
 
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedSqlQuery, setEditedSqlQuery] = useState(answer_sql);
@@ -58,7 +71,11 @@ export default function ChatResult(props: ChatResultProps) {
     }
   }, [liked, notLiked]);
 
-  async function updateLikedNotLikedForQuestion(id: string, liked: boolean, notliked: boolean) {
+  async function updateLikedNotLikedForQuestion(
+    id: string,
+    liked: boolean,
+    notliked: boolean,
+  ) {
     setErrorMsg("");
     const data = {
       id: id,
@@ -134,7 +151,7 @@ export default function ChatResult(props: ChatResultProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-2 dark:bg-slate-900">
+    <div className="mb-2 rounded-lg bg-white p-4 shadow-md dark:bg-slate-900">
       {answer_text && (
         <div className="flex flex-col pb-4">
           <div className="flex flex-row items-start text-gray-400">
@@ -147,11 +164,11 @@ export default function ChatResult(props: ChatResultProps) {
           <ChatResultTable tableData={JSON.parse(answer_table)} />
         </div>
       ) : null}
-      <div className="flex text-gray-400 text-xs p-0 ">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-1 grow ">
+      <div className="flex p-0 text-xs text-gray-400 ">
+        <div className="grid grow grid-cols-2 gap-1 lg:grid-cols-3 ">
           {answer_total_tokens ? (
             <div className="flex">
-              <div className="font-bold pr-2">Tokens:</div>
+              <div className="pr-2 font-bold">Tokens:</div>
               <div>{answer_total_tokens?.toLocaleString()}</div>
             </div>
           ) : (
@@ -160,7 +177,7 @@ export default function ChatResult(props: ChatResultProps) {
 
           {answer_time_taken ? (
             <div className="flex">
-              <div className="font-bold pr-2">Time taken:</div>
+              <div className="pr-2 font-bold">Time taken:</div>
               <div>{answer_time_taken}s</div>
             </div>
           ) : (
@@ -168,7 +185,7 @@ export default function ChatResult(props: ChatResultProps) {
           )}
           {question_ask_date ? (
             <div className="flex">
-              <div className="font-bold pr-2">Asked:</div>
+              <div className="pr-2 font-bold">Asked:</div>
               <div>{question_ask_date.replace("T", " ")}</div>
             </div>
           ) : (
@@ -177,7 +194,7 @@ export default function ChatResult(props: ChatResultProps) {
 
           {sql_generation_status ? (
             <div className="flex">
-              <div className="font-bold pr-2">Valid SQL?</div>
+              <div className="pr-2 font-bold">Valid SQL?</div>
               <div>{sql_generation_status}</div>
             </div>
           ) : (
@@ -193,8 +210,12 @@ export default function ChatResult(props: ChatResultProps) {
           )} */}
           {answer_confidence_score ? (
             <div className="flex">
-              <div className="font-bold pr-2">Confidence:</div>
-              <div>{answer_confidence_score?.toLocaleString(undefined, { style: "percent" })}</div>
+              <div className="pr-2 font-bold">Confidence:</div>
+              <div>
+                {answer_confidence_score?.toLocaleString(undefined, {
+                  style: "percent",
+                })}
+              </div>
             </div>
           ) : (
             <div className="flex"></div>
@@ -202,28 +223,43 @@ export default function ChatResult(props: ChatResultProps) {
 
           <div className="flex">
             <div className="flex flex-row items-center">
-              <div className="font-bold min-w-150px w-10em pr-2 ">Rating:</div>
+              <div className="min-w-150px w-10em pr-2 font-bold ">Rating:</div>
               <div>
                 <IconButton size="small" onClick={() => handleLikeClick()}>
-                  <FontAwesomeIcon style={{ color: liked ? "green" : "" }} className="dark:text-slate-400" size="sm" icon={faThumbsUp} />
+                  <FontAwesomeIcon
+                    style={{ color: liked ? "green" : "" }}
+                    className="dark:text-slate-400"
+                    size="sm"
+                    icon={faThumbsUp}
+                  />
                 </IconButton>
-                <IconButton style={{ marginLeft: "0.5em" }} size="small" onClick={() => handleNotLikeClick()}>
-                  <FontAwesomeIcon style={{ color: notLiked ? "red" : "" }} className="marvinratingicon dark:text-slate-400" size="sm" icon={faThumbsDown} />
+                <IconButton
+                  style={{ marginLeft: "0.5em" }}
+                  size="small"
+                  onClick={() => handleNotLikeClick()}
+                >
+                  <FontAwesomeIcon
+                    style={{ color: notLiked ? "red" : "" }}
+                    className="marvinratingicon dark:text-slate-400"
+                    size="sm"
+                    icon={faThumbsDown}
+                  />
                 </IconButton>
               </div>
             </div>
           </div>
         </div>
         {answer_sql && (
-        <div className="hidden sm:flex sm:items-end">
-          <div className="grow"></div>
-          <Button size="small" className="py-0" onClick={handleCollapseClick}>
-            {isCollapsed ? "Show SQL" : "Hide SQL"}
-          </Button>
-        </div>)}
+          <div className="hidden sm:flex sm:items-end">
+            <div className="grow"></div>
+            <Button size="small" className="py-0" onClick={handleCollapseClick}>
+              {isCollapsed ? "Show SQL" : "Hide SQL"}
+            </Button>
+          </div>
+        )}
       </div>
 
-      <div className="font-bold hidden sm:block flex-shrink:0 ">
+      <div className="flex-shrink:0 hidden font-bold sm:block ">
         {answer_sql && (
           <div>
             {!isCollapsed && (
@@ -231,8 +267,20 @@ export default function ChatResult(props: ChatResultProps) {
                 <div className="min-w-min lg:w-full">
                   {isEditing ? (
                     <div className="flex items-center">
-                      <TextField multiline maxRows={10} label="SQL Query" variant="outlined" size="small" value={editedSqlQuery} onChange={handleInputChange} className="grow" />
-                      <Button onClick={handleCancelClick} className="ml-1 text-xs text-red-600">
+                      <TextField
+                        multiline
+                        maxRows={10}
+                        label="SQL Query"
+                        variant="outlined"
+                        size="small"
+                        value={editedSqlQuery}
+                        onChange={handleInputChange}
+                        className="grow"
+                      />
+                      <Button
+                        onClick={handleCancelClick}
+                        className="ml-1 text-xs text-red-600"
+                      >
                         Cancel
                       </Button>
                       {/* <Button color="error" onClick={handleSaveClick} className="ml-1">
@@ -241,7 +289,7 @@ export default function ChatResult(props: ChatResultProps) {
                     </div>
                   ) : (
                     <div className="flex items-center border-t border-gray-300 pt-2">
-                      <div className="grow w-80">
+                      <div className="w-80 grow">
                         <SyntaxHighlighter
                           customStyle={{
                             marginTop: 0,
@@ -252,7 +300,7 @@ export default function ChatResult(props: ChatResultProps) {
                           wrapLongLines={true}
                           wrapLines={true}
                           language="sql"
-                          style={theme === 'dark' ? atomOneDark: atomOneLight}
+                          style={theme === "dark" ? atomOneDark : atomOneLight}
                         >
                           {answer_sql}
                         </SyntaxHighlighter>
@@ -265,10 +313,14 @@ export default function ChatResult(props: ChatResultProps) {
                             navigator.clipboard.writeText(answer_sql);
                             setIsCopied(true);
                           }}
-                          className="cursor-pointer ml-2"
+                          className="ml-2 cursor-pointer"
                         />
                       </Tooltip>
-                      <Button size="small" onClick={handleEditClick} className="ml-1 text-xs">
+                      <Button
+                        size="small"
+                        onClick={handleEditClick}
+                        className="ml-1 text-xs"
+                      >
                         Raw Text
                       </Button>
                     </div>
@@ -280,7 +332,10 @@ export default function ChatResult(props: ChatResultProps) {
         )}
       </div>
       {error_message && (
-        <Alert className="mt-4 dark:bg-red-950 dark:text-red-600" severity="error">
+        <Alert
+          className="mt-4 dark:bg-red-950 dark:text-red-600"
+          severity="error"
+        >
           {error_message}
         </Alert>
       )}

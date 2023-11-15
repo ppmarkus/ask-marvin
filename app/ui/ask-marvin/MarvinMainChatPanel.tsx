@@ -26,7 +26,9 @@ function MarvinMainChatPanel() {
   // the question will be displayed in the ChatQuestionAnswerUnit
   // the ChatQuestionAnswerUnit will be added to the chat log
 
-  const [chatQuestionAnswerUnits, setChatQuestionAnswerUnits] = useState<any[]>(chat_qestion_answer_data);
+  const [chatQuestionAnswerUnits, setChatQuestionAnswerUnits] = useState<any[]>(
+    chat_qestion_answer_data,
+  );
 
   const scrollableDivRef = useRef<HTMLDivElement>(null);
 
@@ -96,7 +98,10 @@ function MarvinMainChatPanel() {
         not_like_rating: false,
         setHasUpdate,
       };
-      setChatQuestionAnswerUnits([...chatQuestionAnswerUnits, newChatQuestionAnswerUnit]);
+      setChatQuestionAnswerUnits([
+        ...chatQuestionAnswerUnits,
+        newChatQuestionAnswerUnit,
+      ]);
       setHasUpdate(true);
     }
   }, [question]);
@@ -140,13 +145,16 @@ function MarvinMainChatPanel() {
   }
 
   return (
-    <div id="marvinchatwindow" className="w-full h-full flex flex-col justify-between ">
+    <div
+      id="marvinchatwindow"
+      className="flex h-full w-full flex-col justify-between "
+    >
       <div className="overflow-auto pb-64">
         {dataLoading ? (
           <div className="ml-10">
-            <div className="h-2 w-20 bg-gray-300 rounded-full animate-pulse"></div>
-            <div className="h-2 w-20 bg-gray-300 rounded-full animate-pulse mt-2"></div>
-            <div className="h-2 w-20 bg-gray-300 rounded-full animate-pulse mt-2"></div>
+            <div className="h-2 w-20 animate-pulse rounded-full bg-gray-300"></div>
+            <div className="mt-2 h-2 w-20 animate-pulse rounded-full bg-gray-300"></div>
+            <div className="mt-2 h-2 w-20 animate-pulse rounded-full bg-gray-300"></div>
           </div>
         ) : (
           chatQuestionAnswerUnits.map((chat_qa, index) => (

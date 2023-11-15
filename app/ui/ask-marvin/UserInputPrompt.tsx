@@ -1,6 +1,9 @@
 "use client";
 
-import { ChatQuestionAnswerUnitType, MarvinChatState } from "@/app/lib/definitions";
+import {
+  ChatQuestionAnswerUnitType,
+  MarvinChatState,
+} from "@/app/lib/definitions";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputAdornment, TextField } from "@mui/material";
@@ -9,7 +12,15 @@ import IconButton from "@mui/material/IconButton";
 import { useRef, useState } from "react";
 
 export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
-  const { chat_question, set_chat_question, chatQuestionAnswerUnits, setChatQuestionAnswerUnits, setHasUpdate, setHasError, setErrorMessage } = props;
+  const {
+    chat_question,
+    set_chat_question,
+    chatQuestionAnswerUnits,
+    setChatQuestionAnswerUnits,
+    setHasUpdate,
+    setHasError,
+    setErrorMessage,
+  } = props;
   const [sessionUserName, setSessionUserName] = useState<string | null>("");
   const [sessionUserEmail, setSessionUserEmail] = useState<string | null>("");
   const [promptHasText, setPromptHasText] = useState<string>("inherit");
@@ -63,7 +74,10 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
     };
     setHasUpdate(true);
 
-    setChatQuestionAnswerUnits([...chatQuestionAnswerUnits, newChatQuestionAnswerUnit]);
+    setChatQuestionAnswerUnits([
+      ...chatQuestionAnswerUnits,
+      newChatQuestionAnswerUnit,
+    ]);
 
     const status: string = data["status"];
     const errorMsg: string = data["error_message"];
@@ -111,10 +125,14 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
 
   return (
     <div className="flex w-full">
-      {sessionUserName && <div className="font-bold text-teal-600 mr-2">{sessionUserName}</div>}
-      <div className="flex-none fixed bottom-0 left-0 md:left-64 right-0 p-2 flex-col bg-teal-50 dark:bg-teal-950 border-t-2 dark:border-0 border-r-2 border-grey-100">
+      {sessionUserName && (
+        <div className="mr-2 font-bold text-teal-600">{sessionUserName}</div>
+      )}
+      <div className="border-grey-100 fixed bottom-0 left-0 right-0 flex-none flex-col border-r-2 border-t-2 bg-teal-50 p-2 dark:border-0 dark:bg-teal-950 md:left-64">
         <TextField
-          placeholder={"Ask me a question about our firm. Try to be specific (including dates)."}
+          placeholder={
+            "Ask me a question about our firm. Try to be specific (including dates)."
+          }
           fullWidth
           multiline
           minRows={2}
@@ -132,8 +150,15 @@ export default function UserInputPrompt(props: MarvinChatState): JSX.Element {
             endAdornment: (
               <InputAdornment position="start">
                 <div className="ml-1 mr-1 dark:text-slate-300">{`${textLength} /1000`}</div>
-                <IconButton sx={{ padding: "7px", margin: 0}} onClick={handleClick}>
-                  <FontAwesomeIcon icon={faPaperPlane} className="dark:text-slate-300" fontSize={"medium"} />
+                <IconButton
+                  sx={{ padding: "7px", margin: 0 }}
+                  onClick={handleClick}
+                >
+                  <FontAwesomeIcon
+                    icon={faPaperPlane}
+                    className="dark:text-slate-300"
+                    fontSize={"medium"}
+                  />
                 </IconButton>
               </InputAdornment>
             ),

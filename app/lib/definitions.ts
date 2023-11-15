@@ -7,7 +7,6 @@ export type User = {
   password: string;
 };
 
-
 export type ChatQuestionAnswerUnitType = {
   id: string;
   question: string;
@@ -26,7 +25,7 @@ export type ChatQuestionAnswerUnitType = {
   like_rating: boolean;
   not_like_rating: boolean;
   setHasUpdate: (hasUpdated: boolean) => void;
-}
+};
 
 export type MarvinChatState = {
   chat_question: string;
@@ -36,7 +35,7 @@ export type MarvinChatState = {
   setHasUpdate: (hasUpdated: boolean) => void;
   setHasError: (hasError: boolean) => void;
   setErrorMessage: (errorMessage: string | null) => void;
-}
+};
 
 export interface UserInputPrompt {
   chat_question: string;
@@ -48,13 +47,12 @@ export interface UserInputPrompt {
   setErrorMessage: (errorMessage: string | null) => void;
 }
 
-
 export type MarvinMainChatProps = {
   chat_question: string;
   set_chat_question: (question: string) => void;
   setHasUpdate: (hasUpdated: boolean) => void;
   logEntryToLoad: string | null;
-}
+};
 
 export type ChatResultProps = {
   id: string;
@@ -73,7 +71,7 @@ export type ChatResultProps = {
   like_rating: boolean;
   not_like_rating: boolean;
   setHasUpdate: (hasUpdated: boolean) => void;
-}
+};
 
 export type DataUpdateStatus = {
   status: string;
@@ -83,5 +81,4 @@ export type DataUpdateStatus = {
 export type UserInputPromptProps = {
   question: string;
   isCompleted?: boolean;
-}
-
+};

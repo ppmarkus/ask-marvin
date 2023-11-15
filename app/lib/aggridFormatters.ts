@@ -161,9 +161,16 @@ export function yyyymmddToyyyymmWithDashes(props: any) {
 }
 
 export function blankWikiCommentCellStyle(params: any): string | undefined {
-  if (params.value === null || params.value === undefined || params.value.toString().trim() === "") {
+  if (
+    params.value === null ||
+    params.value === undefined ||
+    params.value.toString().trim() === ""
+  ) {
     // if the params.data has a property called recommendationType and the value is not "Subscribe" then return the style
-    if (params.data.recommendationType && params.data.recommendationType !== "Subscribe") {
+    if (
+      params.data.recommendationType &&
+      params.data.recommendationType !== "Subscribe"
+    ) {
       return "wiki-no-comment-cell-style";
     }
   }

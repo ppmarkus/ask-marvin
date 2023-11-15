@@ -1,12 +1,13 @@
 "use client";
 
-import Box from "@mui/material/Box";
 import ChatResult from "./ChatResult";
 import UserInputPromptSent from "./UserInputPromptSent";
 
 import { ChatQuestionAnswerUnitType } from "@/app/lib/definitions";
 
-export default function ChatQuestionAnswerUnit(props: ChatQuestionAnswerUnitType) {
+export default function ChatQuestionAnswerUnit(
+  props: ChatQuestionAnswerUnitType,
+) {
   const {
     id,
     question,
@@ -28,7 +29,13 @@ export default function ChatQuestionAnswerUnit(props: ChatQuestionAnswerUnitType
   } = props;
 
   return (
-    <div className={`${is_odd ? "bg-transparent border-gray-200 border-x-0 border-y-0" : "bg-white rounded-lg dark:bg-slate-900"} p-4 `}>
+    <div
+      className={`${
+        is_odd
+          ? "border-x-0 border-y-0 border-gray-200 bg-transparent"
+          : "rounded-lg bg-white dark:bg-slate-900"
+      } p-4 `}
+    >
       <UserInputPromptSent question={question!} />
 
       <ChatResult

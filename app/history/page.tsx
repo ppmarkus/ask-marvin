@@ -1,7 +1,7 @@
 import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
-  title: "History"
+  title: "History",
 };
 
 export default function Page() {
